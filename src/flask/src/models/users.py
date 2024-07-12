@@ -14,6 +14,14 @@ class BaseUser(object):
 
 class User(BaseUser):
 
+    params = [
+        'id',
+        'first_name',
+        'last_name',
+        'is_admin',
+        'pfp_id'
+    ]
+
 
     def _get_friends(self):
         pass
@@ -33,7 +41,12 @@ class User(BaseUser):
 
 class Friend(BaseUser):
 
+    params = [
+        'id',
+        'first_name',
+        'last_name'
+    ]
+
 
     def get_mutuals(self):
         pass
-

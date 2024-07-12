@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+h1 {
+    margin-top: 10px;
+}
+
+#cont {
+    text-align: center;
+    border-radius: 5px;
+    margin-top : 25%;
+    max-width: 100%;
+    padding: 0 10px 10px 10px;
+    background-color:  #DADDE2;  
+    border: 3px solid #0F2862;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.rgInp {
+width : 98%;
+padding-left: 4px;
+height: 35px;
+font-size: 20px;
+border: 2px solid none;
+} 
+
+#regfrSub{
+    font-size: 20px;
+    margin-top : 20px;
+    width : 100%;
+    padding : 10px;
+    /*background-color: #2F81FA ;*/
+    background-color: #DADDE2;
+    border : 3px solid #4f5f76;
+    transition : background-color .5s;
+    transition : color .5s;
+}
+
+#regfrSub:hover {
+    color : white;
+    background-color : #4f5f76;
+}
+
+#goBk {
+    color : black;
+    font-size: 20px;
+    margin-top: 20px;
+    width :100%;
+    padding:10px;
+    background-color: #DADDE2;
+    border : 3px solid #4f5f76;
+    border-radius: 5px;
+    transition : background-color .5s;
+    transition : color .5s;
+    /* background-color:   ; */
+
+} 
+#goBk:hover {
+    color : white;
+    background-color : #4f5f76;
+}
+
+.reggb {
+    text-decoration: none;
+    color : white;
+}
+
+.matInp{
+    width:100%;
+    color :black;
+    font-size:20px;
+}

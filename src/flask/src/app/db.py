@@ -4,24 +4,26 @@ import configparser
 from pprint import pprint
 from pymongo import MongoClient
 
+
 # pprint(sys.path)
-pprint(sys.argv)
-
 config = configparser.ConfigParser()
-config.read('db_config.ini')
-
-print(config.sections())
+config.read(r'C:\Coding\ShareTube\config\db_config.ini')
 
 MONGODB_URI = config.get('CONNECTION', 'DB_URI')
-print(MONGODB_URI)
 client = MongoClient(MONGODB_URI)
-
-
-for db_info in client.list_database_names():
-    print(db_info)
-
-
 db = client['app_users']
-collections = db.list_collection_names()
-for collection in collections:
-   print(collection)
+app_users = db['app_user']
+
+
+def insert_app_user(app_users, user:dict):
+    app_users.insert_one({
+    'first_name': user.get('first_name', 'DEFAULT_FIRST_NAME'),
+    'last_name': user.get('last_name', 'DEFAULT_LAST_NAME'),
+    'is_admin': user.get('is_admin', False),
+    'is_active': user.get('is_active', True),
+    'pfp_id': user.get('pfp_id', 'DEFAULT_PFP')
+    })
+
+
+def remove_app_user(app_users, user_id):
+    pass

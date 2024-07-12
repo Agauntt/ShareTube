@@ -1,3 +1,6 @@
+import src.app.db
+
+from src.app.routes import Home, Login
 from flask import Flask
 from flask_restful import Api, Resource
 
@@ -13,6 +16,8 @@ class Test(Resource):
         return f"app running..."
     
 
+api.add_resource(Home, '/')
+api.add_resource(Login, '/login')
 api.add_resource(Test, '/testing')
 
 if __name__ == '__main__':

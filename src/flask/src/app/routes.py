@@ -1,10 +1,12 @@
 import src.app.db
 
-from flask import Flask
-from flask_restful import Api, Resource
+from flask_restful import Resource
 
-app = Flask(__name__)
-api = Api(app)
+
+class Landing(Resource):
+
+    def get(self):
+        return "This is the landing page"
 
 
 class Login(Resource):

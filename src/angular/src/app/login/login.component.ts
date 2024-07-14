@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { User } from '../models/user'
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
+import { UserServiceService } from '../user-service.service';
 import { match } from 'assert';
 import { stringify } from 'querystring';
 
@@ -21,7 +22,7 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)
   })
 
-  constructor(private authService:AuthServiceService, private router: Router) {
+  constructor(private authService:AuthServiceService, private userService: UserServiceService, private router: Router) {
     this.user = new User
   }
 
@@ -31,19 +32,12 @@ export class LoginComponent {
       console.log('valid form')
       this.user.username = this.loginForm.value['username']
       this.user.password = this.loginForm.value['password']
-      console.log(this.user)
-
+      // console.log(this.user)
       this.authService.logIn(this.user).subscribe(data => {
-        if (typeof data == 'string') {
-          if (data != '1'){
-            console.log('golden ticket')
-            localStorage.setItem('id', data)
+        if (typeof data == 'string' && data != '1') {
+            this.userService.saveUsrID(data)
             this.router.navigate(['/home'])
-          }else {
-            console.log('access denied.')
-            this.router.navigate(['/'])
-          }
-        }else {
+        } else {
           console.log('access denied.')
           this.router.navigate(['/'])
         }

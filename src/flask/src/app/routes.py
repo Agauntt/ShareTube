@@ -28,8 +28,6 @@ class Login(Resource):
         if ret is not None:
             print('user found')
             x = str(ret.get('_id', 1))
-            print(type(x))
-            print(x)
             return x
         return '1'
             
@@ -55,6 +53,7 @@ class SignUp(Resource):
     def post(self):
         print('Posted user data')
         user = request.get_json()
-        insert_app_user(app_users, user)
-        pprint(user)
+        user_id = insert_app_user(app_users, user)
+        pprint(user_id)
+        return user_id
         

@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { User } from '../models/user'
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
-import { match } from 'assert';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +37,8 @@ export class SignupComponent {
       this.user.password = this.signupForm.value['password']
       console.log(this.user)
       this.authService.signUp(this.user).subscribe(data => {
-        if (data != null) {
+        console.log('data: ' + data)
+        if (typeof data == 'string' && data != 'None') {
           console.log('great success!')
           localStorage.setItem('username', this.user.username)
           this.router.navigate(['/home'])

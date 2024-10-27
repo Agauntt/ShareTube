@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { User } from '../models/user'
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,10 +22,8 @@ export class SignupComponent {
     password: new FormControl('', Validators.required)
   })
 
-  constructor(private authService:AuthServiceService, private router: Router) {
-    this.user = new User
-    this.user.is_active = true
-    this.user.is_admin = false
+  constructor(private authService:AuthServiceService, private userService:UserServiceService, private router: Router) {
+    this.user = userService.userObj()
   }
 
   onSubmit(){ 
@@ -40,7 +39,8 @@ export class SignupComponent {
         console.log('data: ' + data)
         if (typeof data == 'string' && data != 'None') {
           console.log('great success!')
-          localStorage.setItem('username', this.user.username)
+          this.userService.saveUsrID(data)
+          console.log(this.userService.fetchUsrID())
           this.router.navigate(['/home'])
         }
       })

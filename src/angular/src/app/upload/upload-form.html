@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Upload Form</h2>
+<mat-dialog-content>
+    <form class="form form-group" [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <div class="column">
+            <div class="input-box">
+                <label>File Name</label>
+                <input type="text" formControlName="filename" required/>
+            </div>
+            <div class="input-box">
+                <label>File Path</label>
+                <input formControlName="path" type="file" (change)="onFileChange($event)" required/>
+            </div>
+        </div>
+        <div class="column">
+            <section>
+                <div class="public_switch">
+                    <p><mat-slide-toggle  labelPosition="before" [checked]="true"(change)="togglePublic()"> 
+                        {{ this.public == true ? 'Public' : 'Private' }}
+                    </mat-slide-toggle></p>
+                </div>
+            </section>
+        </div>
+        <div>
+        <mat-dialog-actions>
+            <button mat-button mat-dialog-submit type="submit">Upload File</button>
+        </mat-dialog-actions>
+        <mat-dialog-actions>
+          <button mat-button mat-dialog-close>Close</button>
+        </mat-dialog-actions>
+        </div>
+    </form>
+</mat-dialog-content>

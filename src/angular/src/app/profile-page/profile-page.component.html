@@ -1,2 +1,5 @@
 <p>profile-page works!</p>
-<p>{{user._id}}</p>
+<p>{{id}}</p>
+<p>Hello, {{user['username']}}.</p>
+<button mat-button name="UploadBtn" class="Upload_btn" (click)="purgeSession()" routerLink="/">Log Out</button>
+<app-upload></app-upload>

@@ -6,6 +6,9 @@ import { AuthServiceService } from '../auth-service.service';
 import { UserServiceService } from '../user-service.service';
 import { match } from 'assert';
 import { stringify } from 'querystring';
+import { log } from 'console';
+import { Subscription, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,9 @@ import { stringify } from 'querystring';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  user:User;
+  private username: string;
+  private password: string;
+  private subscription: Subscription = new Subscription
 
   protected loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -23,28 +28,33 @@ export class LoginComponent {
   })
 
   constructor(private authService:AuthServiceService, private userService: UserServiceService, private router: Router) {
-    this.user = new User
   }
 
   onSubmit(){ 
     console.log('---Attempting to Log In')
     if(this.loginForm.valid){
       console.log('valid form')
-      this.user.username = this.loginForm.value['username']
-      this.user.password = this.loginForm.value['password']
+      const username = this.loginForm.value['username']
+      const password = this.loginForm.value['password']
+      console.log(this.username)
       // console.log(this.user)
-      this.authService.logIn(this.user).subscribe(data => {
+      this.authService.logIn(username, password).subscribe(data => {
+        console.log(data)
         if (typeof data == 'string' && data != '1') {
             this.userService.saveUsrID(data)
             this.router.navigate(['/home'])
+            console.log('this thing is still loaded for some reason...')
+            return
         } else {
           console.log('access denied.')
           this.router.navigate(['/'])
+          return
         }
       })
+      // login.unsubscribe()
     } else {
       console.log('form invalid')
       console.log(this.loginForm)
-    }
+    }    
   }
 }

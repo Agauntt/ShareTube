@@ -16,7 +16,7 @@ export class AuthServiceService {
   private login: string;
 
   constructor(private http:HttpClient) {
-    this.user = new User
+    this.user = this.user as User;
     this.baseUrl= 'http://127.0.0.1:5000'
     this.signup = this.baseUrl + '/signup'
     this.login = this.baseUrl + '/login'
@@ -28,9 +28,15 @@ export class AuthServiceService {
     return this.http.post<User>(this.signup, user);
   }
 
-  public logIn(user:User){
-    user.password = shajs('sha256').update(user.password).digest('hex');
-    console.log(user.password);
-    return this.http.post<User>(this.login, user);
+  public logIn(username, password){
+    console.log(username)
+    console.log(password)
+    password = shajs('sha256').update(password).digest('hex');
+    console.log(password);
+    let usr_payload = {
+      username: username,
+      password: password
+    }
+    return this.http.post<User>(this.login, usr_payload);
   }
 }
